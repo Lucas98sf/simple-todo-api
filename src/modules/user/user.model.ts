@@ -1,5 +1,5 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
 import bcrypt from "bcryptjs";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
 export type User = {
 	name: string;

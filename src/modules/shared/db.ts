@@ -1,4 +1,5 @@
 import { connect, connection, ConnectOptions } from "mongoose";
+
 import { logger } from "./logger";
 
 export const connectToDatabase = async (mongoUri: string): Promise<void> => {

@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import * as handler from "./user.handler";
 
 const userRouter = Router();

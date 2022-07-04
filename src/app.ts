@@ -1,10 +1,11 @@
 import "express-async-errors";
-import express, { Router } from "express";
-import cors from "cors";
 
-import userRouter from "@/modules/user/user.router";
+import cors from "cors";
+import express, { Router } from "express";
+
 import { errorHandler } from "@/modules/shared/errors";
 import { httpLogger } from "@/modules/shared/logger";
+import userRouter from "@/modules/user/user.router";
 
 const app = express();
 
