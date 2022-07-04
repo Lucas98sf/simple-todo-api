@@ -1,8 +1,9 @@
 import bcrypt from "bcryptjs";
+import Joi from "joi";
 import mongoose, { Document, Schema, Types } from "mongoose";
 
 export type User = {
-	name: string;
+	username: string;
 	email: string;
 	password: string;
 	todos: Types.ObjectId[];
@@ -12,17 +13,29 @@ export interface UserDocument extends User, Document {
 	hashPassword(password: string): Promise<string>;
 }
 
+export const UserInput = Joi.object<User>({
+	// eslint-disable-next-line no-magic-numbers
+	username: Joi.string().alphanum().min(3).max(30).required(),
+
+	// eslint-disable-next-line no-magic-numbers
+	password: Joi.string().min(3).max(30).required(),
+
+	email: Joi.string().email().required(),
+});
+
 const UserSchema = new Schema<User>(
 	{
-		name: {
+		username: {
 			type: String,
 			required: true,
 			min: 3,
-			max: 40,
+			max: 30,
 		},
 		password: {
 			type: String,
 			required: true,
+			min: 3,
+			max: 30,
 		},
 		email: {
 			type: String,

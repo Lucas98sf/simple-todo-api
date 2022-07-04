@@ -11,11 +11,12 @@ const app = express();
 
 app.use(httpLogger);
 app.use(express.json());
-app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 const router = Router();
 router.use("/user", userRouter);
+
 app.use("/api/v1", router);
 
 app.use(errorHandler);

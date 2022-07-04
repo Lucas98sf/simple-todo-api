@@ -1,12 +1,13 @@
 import type { Request, Response } from "express";
 
-import { User, UserModel } from "./user.model";
+import type { User } from "./user.model";
+import * as userService from "./user.service";
 
 export async function createUser(
 	req: Request,
 	res: Response
 ): Promise<Response<User>> {
-	const userData: User = req.body as User;
-	const user = await UserModel.create(userData);
+	const user = await userService.createUser(req.body as User);
+
 	return res.json(user);
 }
