@@ -3,8 +3,8 @@ import express, { Router } from "express";
 import cors from "cors";
 
 import userRouter from "@/modules/user/user.router";
-import { errorHandler } from "./errors";
-import { httpLogger } from "./logger";
+import { errorHandler } from "@/modules/shared/errors";
+import { httpLogger } from "@/modules/shared/logger";
 
 const app = express();
 

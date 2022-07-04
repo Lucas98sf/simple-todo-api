@@ -1,7 +1,7 @@
 import app from "@/app";
 import config from "@/config";
-import { connectToDatabase } from "@/db";
-import { logger } from "./logger";
+import { connectToDatabase } from "@/modules/shared/db";
+import { logger } from "@/modules/shared/logger";
 
 const bootstrap = async () => {
 	if (!config.MONGO_URI)
