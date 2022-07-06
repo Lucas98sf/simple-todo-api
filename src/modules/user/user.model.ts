@@ -1,6 +1,7 @@
-import bcrypt from 'bcryptjs';
 import Joi from 'joi';
 import mongoose, { Document, Schema, Types } from 'mongoose';
+
+import hashPassword from '@/util/hash-password';
 
 type User = {
 	username: string;
@@ -41,14 +42,6 @@ const UserSchema = new Schema<User>(
 			createdAt: true,
 			updatedAt: true,
 		},
-		methods: {
-			hashPassword: async function (password: string) {
-				const salt = await bcrypt.genSalt();
-				const hashedPassword = await bcrypt.hash(password, salt);
-
-				return hashedPassword;
-			},
-		},
 	}
 );
 
@@ -69,14 +62,13 @@ const userInputValidation = Joi.object<UserInput>({
 }).required();
 
 interface UserDocument extends User, Document {
-	hashPassword?(password: string): Promise<string>;
+	_update?: Partial<UserInput>;
 }
 
-UserSchema.pre<UserDocument>('save', async function (next) {
-	if (this.isModified('password') || this.isNew) {
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		const hashedPassword = await this.hashPassword!(this.password);
-		this.password = hashedPassword;
+UserSchema.pre<UserDocument>(/save|findOneAndUpdate/, async function (next) {
+	if (this._update?.password) this._update.password = await hashPassword(this._update.password);
+	else if ((this.isModified && this.isModified('password')) || this.isNew) {
+		this.password = await hashPassword(this.password);
 	}
 
 	return next();

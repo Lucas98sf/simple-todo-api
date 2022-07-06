@@ -2,7 +2,7 @@ import httpStatus from 'http-status';
 import { isValidObjectId, Types } from 'mongoose';
 
 import { AppError } from '../shared/errors';
-import { User, UserDocument, UserModel, UserWithId } from './user.model';
+import { UserDocument, UserInput, UserModel, UserWithId } from './user.model';
 
 const validateObjectId = async (id: string): Promise<Types.ObjectId> => {
 	if (!isValidObjectId(id)) throw new AppError(httpStatus.BAD_REQUEST, 'Invalid id format');
@@ -18,7 +18,7 @@ const ensureUserIdExists = async (userId: Types.ObjectId): Promise<void> => {
 	if (userIdNotFound)
 		throw new AppError(
 			httpStatus.PRECONDITION_FAILED,
-			`User with the id '${userId.toString()}' does not exist in the database`
+			`User with id '${userId.toString()}' does not exist in the database`
 		);
 };
 
@@ -28,11 +28,11 @@ const ensureNonDuplicateEmail = async (email: string): Promise<void> => {
 	if (userEmailAlreadyExists)
 		throw new AppError(
 			httpStatus.BAD_REQUEST,
-			`User with the email '${email}' already exists in the database`
+			`User with email '${email}' already exists in the database`
 		);
 };
 
-export const createUser = async (userData: User): Promise<UserDocument> => {
+export const createUser = async (userData: UserInput): Promise<UserDocument> => {
 	await ensureNonDuplicateEmail(userData.email);
 
 	const newUser = await new UserModel(userData).save();
@@ -52,7 +52,7 @@ export const findUsers = async (id?: string, email?: string): Promise<UserDocume
 
 export const updateUser = async (
 	userId: string,
-	userData: Partial<User>
+	userData: Partial<UserInput>
 ): Promise<UserDocument> => {
 	const userObjectId = await validateObjectId(userId);
 	await ensureUserIdExists(userObjectId);
