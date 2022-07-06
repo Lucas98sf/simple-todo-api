@@ -6,14 +6,13 @@ module.exports = {
 		// "plugin:@typescript-eslint/recommended-requiring-type-checking",
 		"prettier",
 	],
-	plugins: ["prettier", "@typescript-eslint", "simple-import-sort"],
+	plugins: ["@typescript-eslint", "simple-import-sort"],
 	parserOptions: {
 		sourceType: "module",
 		tsconfigRootDir: __dirname,
 		project: ["./tsconfig.json"],
 	},
 	rules: {
-		"prettier/prettier": "error",
 		"no-console": "error",
 		"no-unused-vars": "off",
 		"simple-import-sort/imports": "error",
