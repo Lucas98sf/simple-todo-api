@@ -1,10 +1,10 @@
-import pino from "pino-http";
+import pino from 'pino-http';
 
 export const httpLogger = pino({
 	autoLogging: true,
-	level: "debug",
+	level: 'debug',
 	transport: {
-		target: "pino-pretty",
+		target: 'pino-pretty',
 		options: {
 			colorize: true,
 			hideObject: true,
