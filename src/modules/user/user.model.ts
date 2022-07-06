@@ -9,6 +9,8 @@ export type User = {
 	todos: Types.ObjectId[];
 };
 
+export type UserWithId = User & { _id: Types.ObjectId };
+
 export interface UserDocument extends User, Document {
 	hashPassword(password: string): Promise<string>;
 }
