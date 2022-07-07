@@ -54,7 +54,7 @@ type UserInput = {
 
 const userInputValidation = Joi.object<UserInput>({
 	// eslint-disable-next-line no-magic-numbers
-	username: Joi.string().alphanum().min(2).max(30),
+	username: Joi.string().token().min(2).max(30),
 
 	// eslint-disable-next-line no-magic-numbers
 	password: Joi.string().min(8).max(50),

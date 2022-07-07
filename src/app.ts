@@ -3,8 +3,8 @@ import 'express-async-errors';
 import cors from 'cors';
 import express, { Router } from 'express';
 
-import { errorHandler } from '@/modules/shared/errors';
-import { httpLogger } from '@/modules/shared/logger';
+import { errorHandler } from '@/errors';
+import { httpLogger } from '@/logger';
 import userRouter from '@/modules/user/user.router';
 
 const app = express();
