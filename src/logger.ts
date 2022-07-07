@@ -1,8 +1,10 @@
 import pino from 'pino-http';
 
+import config from './config';
+
 export const httpLogger = pino({
 	autoLogging: true,
-	level: 'debug',
+	level: config.LOG_LEVEL,
 	transport: {
 		target: 'pino-pretty',
 		options: {

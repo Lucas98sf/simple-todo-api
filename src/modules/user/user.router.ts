@@ -13,7 +13,7 @@ userRouter.route('/').post(validateBody(requiredUserInput), handler.createUser);
 
 userRouter.route('/').get(handler.findUsers);
 
-userRouter.route('/:id').put(validateBody(userInputValidation), handler.updateUser);
+userRouter.route('/:id').patch(validateBody(userInputValidation), handler.updateUser);
 
 userRouter.route('/:id').delete(handler.deleteUser);
 
