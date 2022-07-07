@@ -9,6 +9,6 @@ const bootstrap = async () => {
 	await connectToDatabase(config.MONGO_URI);
 
 	app.listen(config.PORT);
-	logger.debug(`Server is running on port ${config.PORT}`);
+	logger.info(`Server is running on port ${config.PORT}`);
 };
 bootstrap();

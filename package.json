@@ -5,10 +5,10 @@
 	"license": "MIT",
 	"scripts": {
 		"prepare": "husky install",
-		"build": "tsc",
-		"start": "node -r tsconfig-paths/register dist/server.js",
+		"build": "npx rimraf ./dist && tsc",
+		"start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
 		"test": "jest --runInBand --coverage",
-		"dev": "ts-node-dev -r tsconfig-paths/register src/server.ts "
+		"dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts "
 	},
 	"devDependencies": {
 		"@types/bcryptjs": "^2.4.2",
@@ -53,7 +53,7 @@
 		"*.ts": [
 			"eslint --cache --fix .",
 			"prettier --write .",
-			"yarn test"
+			"yarn test --onlyChanged --passWithNoTests"
 		],
 		"*.{json,md}": "prettier --write ."
 	}
