@@ -19,6 +19,7 @@ const UserSchema = new Schema<User>(
 			required: true,
 			min: 2,
 			max: 30,
+			unique: true,
 		},
 		password: {
 			type: String,
@@ -58,7 +59,7 @@ const userInputValidation = Joi.object<UserInput>({
 	// eslint-disable-next-line no-magic-numbers
 	password: Joi.string().min(8).max(50),
 
-	email: Joi.string().email(),
+	email: Joi.string().email().lowercase(),
 }).required();
 
 interface UserDocument extends User, Document {

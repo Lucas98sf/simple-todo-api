@@ -6,6 +6,7 @@ export const validateBody =
 		const joiSchema = Joi.compile(schema);
 		const { error }: ValidationResult<typeof schema> = joiSchema.validate(req.body, {
 			abortEarly: false,
+			convert: true,
 		});
 
 		if (error) {
