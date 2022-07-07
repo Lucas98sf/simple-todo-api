@@ -12,9 +12,9 @@ export async function createUser(req: Request, res: Response) {
 
 export async function findUsers(req: Request, res: Response) {
 	const { id, email } = req.query;
-	const user = await service.findUsers(id as string, email as string);
+	const userList = await service.findUsers(id as string, email as string);
 
-	return res.json(user);
+	return res.json(userList);
 }
 
 export async function updateUser(req: Request, res: Response) {

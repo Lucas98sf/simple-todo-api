@@ -28,7 +28,7 @@ const ensureNonDuplicateUserData = async (email?: string, username?: string): Pr
 
 		if (userEmailAlreadyExists)
 			throw new AppError(
-				httpStatus.BAD_REQUEST,
+				httpStatus.CONFLICT,
 				`User with email '${email}' already exists in the database`
 			);
 	}
@@ -38,7 +38,7 @@ const ensureNonDuplicateUserData = async (email?: string, username?: string): Pr
 
 		if (userUsernameAlreadyExists)
 			throw new AppError(
-				httpStatus.BAD_REQUEST,
+				httpStatus.CONFLICT,
 				`User with username '${username}' already exists in the database`
 			);
 	}
@@ -57,7 +57,7 @@ export const findUsers = async (id?: string, email?: string): Promise<UserDocume
 	if (id) query._id = await validateObjectId(id);
 	if (email) query.email = email;
 
-	const users = await UserModel.find(query);
+	const users = await UserModel.find(query).select('-password');
 
 	return users;
 };

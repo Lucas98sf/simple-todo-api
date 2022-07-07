@@ -28,5 +28,5 @@ module.exports = {
 			},
 		],
 	},
-	ignorePatterns: ['.eslintrc.js', '*.config.js'],
+	ignorePatterns: ['**/*.js'],
 };

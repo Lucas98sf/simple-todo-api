@@ -4,7 +4,7 @@ import config from './config';
 
 export const httpLogger = pino({
 	autoLogging: true,
-	level: config.LOG_LEVEL,
+	useLevel: config.LOG_LEVEL,
 	transport: {
 		target: 'pino-pretty',
 		options: {

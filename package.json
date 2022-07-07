@@ -7,7 +7,7 @@
 		"prepare": "husky install",
 		"build": "tsc",
 		"start": "node -r tsconfig-paths/register dist/server.js",
-		"test": "jest",
+		"test": "jest --runInBand --coverage",
 		"dev": "ts-node-dev -r tsconfig-paths/register src/server.ts "
 	},
 	"devDependencies": {
@@ -50,7 +50,11 @@
 		"pino-http": "^8.1.0"
 	},
 	"lint-staged": {
-		"*.ts": "eslint --cache --fix .",
+		"*.ts": [
+			"eslint --cache --fix .",
+			"prettier --write .",
+			"yarn test"
+		],
 		"*.{json,md}": "prettier --write ."
 	}
 }
